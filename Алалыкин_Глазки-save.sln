@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Алалыкин_Глазки-save", "Алалыкин_Глазки-save\Алалыкин_Глазки-save.csproj", "{DF76339A-C1CC-4535-9489-4C2E85C72C56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF76339A-C1CC-4535-9489-4C2E85C72C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF76339A-C1CC-4535-9489-4C2E85C72C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF76339A-C1CC-4535-9489-4C2E85C72C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF76339A-C1CC-4535-9489-4C2E85C72C56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23E55967-EC85-446C-924A-9486896F2D10}
+	EndGlobalSection
+EndGlobal
