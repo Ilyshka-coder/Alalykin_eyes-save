@@ -6,9 +6,80 @@
       xmlns:local="clr-namespace:Алалыкин_Глазки_save"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AgentsPage">
+      Title="AgentsPage" FontFamily="Century Gothic">
 
     <Grid>
-        <Button Content="Далее" Click="Button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <TextBox Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged"  Width="300" FontSize="15"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <ComboBox Name="ComboType" SelectionChanged="ComboType_SelectionChanged"  FontSize="15" Width="200">
+                    <TextBlock>Все типы</TextBlock>
+                    <TextBlock>МФО</TextBlock>
+                    <TextBlock>ООО</TextBlock>
+                    <TextBlock>ЗАО</TextBlock>
+                    <TextBlock>МКК</TextBlock>
+                    <TextBlock>ОАО</TextBlock>
+                    <TextBlock>ПАО</TextBlock>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <ComboBox Name="SortType" SelectionChanged="SortType_SelectionChanged"  FontSize="15" Width="200">
+                    <TextBlock>Сортировка</TextBlock>
+                    <TextBlock>наименование по возрастанию</TextBlock>
+                    <TextBlock>наименование по убыванию</TextBlock>
+                    <TextBlock>скидка по возрастанию</TextBlock>
+                    <TextBlock>скидка по убыванию</TextBlock>
+                    <TextBlock>приоритет по возрастанию</TextBlock>
+                    <TextBlock>приоритет по убыванию</TextBlock>
+                </ComboBox>
+            </StackPanel>
+        </WrapPanel>
+        <ListView Name="AgentListView" Grid.Row="2">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" BorderThickness="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"/>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Width="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4"  HorizontalAlignment="Center">
+                                            <Image.Source>
+                                                <Binding Path="Logo">
+                                                </Binding>
+                                            </Image.Source>
+                                        </Image>
+                                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                            <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding AgentTypeTitle}"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="  |  "></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding Title}"></TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding ProductCount,StringFormat={}{0:0} продаж за год}"></TextBlock>
+                                        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
+                                            <TextBlock FontSize="16" Text="{Binding Phone}"></TextBlock>
+                                            <TextBlock Text="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     "/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding Priority,StringFormat=Приоритетность: {0}}"></TextBlock>
+                                        <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" FontSize="20" Text="{Binding INN,StringFormat={}{0:0}%}"></TextBlock>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
     </Grid>
 </Page>

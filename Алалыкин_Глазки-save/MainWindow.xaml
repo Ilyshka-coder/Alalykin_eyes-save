@@ -13,7 +13,7 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Image Source="/eyes-resources/Глазки-save.png" HorizontalAlignment="Left"></Image>
-        <TextBlock Text="Глазки-save" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Список агентов" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Frame Grid.Row="1" Name="MainFrame" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden"></Frame>
         <Button Content="Назад" Name="BtnBack" HorizontalAlignment="Right" Click="BtnBack_Click"/>
     </Grid>
