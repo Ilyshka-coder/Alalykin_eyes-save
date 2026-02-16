@@ -21,6 +21,12 @@ namespace Алалыкин_Глазки_save
         public int ProductCount { get; set; }
         public virtual Agent Agent { get; set; }
         public virtual Product Product { get; set; }
-        
+        public decimal Cost
+        {
+            get
+            {
+                return Product.MinCostForAgent * ProductCount;
+            }
+        }
     }
 }

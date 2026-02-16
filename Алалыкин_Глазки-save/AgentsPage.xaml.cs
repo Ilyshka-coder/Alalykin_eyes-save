@@ -25,6 +25,8 @@ namespace Алалыкин_Глазки_save
             InitializeComponent();
             var currentAgent = AlalykinEyesEntities1.GetContext().Agent.ToList();
             AgentListView.ItemsSource = currentAgent;
+            ComboType.SelectedIndex = 0;
+            SortType.SelectedIndex = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,46 +36,78 @@ namespace Алалыкин_Глазки_save
 
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            UpdateAgents();
         }
 
         private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            UpdateAgents();
         }
 
         private void SortType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            UpdateAgents();
         }
         private void UpdateAgents()
         {
-            var currentServices = AlalykinEyesEntities1.GetContext().Service.ToList();
+            var currentAgents = AlalykinEyesEntities1.GetContext().Agent.ToList();
             if (ComboType.SelectedIndex == 0)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DiscountIt) >= 0 && Convert.ToInt32(p.DiscountIt) <= 100)).ToList();
+                currentAgents = currentAgents.Where(p => (p.AgentTypeTitle != "")).ToList();
             }
             if (ComboType.SelectedIndex == 1)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DiscountIt) >= 0 && Convert.ToInt32(p.DiscountIt) < 5)).ToList();
+                currentAgents = currentAgents.Where(p => (p.AgentTypeTitle == "МФО")).ToList();
             }
             if (ComboType.SelectedIndex == 2)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DiscountIt) >= 5 && Convert.ToInt32(p.DiscountIt) < 15)).ToList();
+                currentAgents = currentAgents.Where(p => (p.AgentTypeTitle == "ООО")).ToList();
             }
             if (ComboType.SelectedIndex == 3)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DiscountIt) >= 15 && Convert.ToInt32(p.DiscountIt) < 30)).ToList();
+                currentAgents = currentAgents.Where(p => (p.AgentTypeTitle == "ЗАО")).ToList();
             }
             if (ComboType.SelectedIndex == 4)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DiscountIt) >= 30 && Convert.ToInt32(p.DiscountIt) < 70)).ToList();
+                currentAgents = currentAgents.Where(p => (p.AgentTypeTitle == "МКК")).ToList();
             }
             if (ComboType.SelectedIndex == 5)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DiscountIt) >= 70 && Convert.ToInt32(p.DiscountIt) <= 100)).ToList();
+                currentAgents = currentAgents.Where(p => (p.AgentTypeTitle == "ОАО")).ToList();
             }
-            currentServices = currentServices.Where(p => p.Title.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
+            if (ComboType.SelectedIndex == 6)
+            {
+                currentAgents = currentAgents.Where(p => (p.AgentTypeTitle == "ПАО")).ToList();
+            }
+            if (SortType.SelectedIndex == 0)
+            {
+                currentAgents = currentAgents.ToList();
+            }
+            if (SortType.SelectedIndex == 1)
+            {
+                currentAgents = currentAgents.OrderBy(p => p.Title).ToList();
+            }
+            if (SortType.SelectedIndex == 2)
+            {
+                currentAgents = currentAgents.OrderByDescending(p => p.Title).ToList();
+            }
+            if (SortType.SelectedIndex == 3)
+            {
+                currentAgents = currentAgents.OrderBy(p => p.Discount).ToList();
+            }
+            if (SortType.SelectedIndex == 4)
+            {
+                currentAgents = currentAgents.OrderByDescending(p => p.Discount).ToList();
+            }
+            if (SortType.SelectedIndex == 5)
+            {
+                currentAgents = currentAgents.OrderBy(p => p.Priority).ToList();
+            }
+            if (SortType.SelectedIndex == 6)
+            {
+                currentAgents = currentAgents.OrderByDescending(p => p.Priority).ToList();
+            }
+            currentAgents = currentAgents.Where(p => (p.Title.ToLower().Contains(TBoxSearch.Text.ToLower()) || p.PhoneNum.Contains(TBoxSearch.Text) || p.Email.ToLower().Contains(TBoxSearch.Text.ToLower()))).ToList();
             AgentListView.ItemsSource = currentAgents.ToList();
             AgentListView.ItemsSource = currentAgents;
         }

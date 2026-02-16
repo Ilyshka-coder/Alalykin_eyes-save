@@ -32,7 +32,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <ComboBox Name="SortType" SelectionChanged="SortType_SelectionChanged"  FontSize="15" Width="200">
-                    <TextBlock>Сортировка</TextBlock>
+                    <TextBlock>сортировка</TextBlock>
                     <TextBlock>наименование по возрастанию</TextBlock>
                     <TextBlock>наименование по убыванию</TextBlock>
                     <TextBlock>скидка по возрастанию</TextBlock>
@@ -45,12 +45,12 @@
         <ListView Name="AgentListView" Grid.Row="2">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Black" BorderThickness="1">
+                    <Border BorderBrush="Black" BorderThickness="1" Background="{Binding FontStyle}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="1580"></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="50"/>
@@ -58,24 +58,20 @@
                                             <RowDefinition Height="30"/>
                                             <RowDefinition Height="30"/>
                                         </Grid.RowDefinitions>
-                                        <Image Width="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4"  HorizontalAlignment="Center">
-                                            <Image.Source>
-                                                <Binding Path="Logo">
-                                                </Binding>
-                                            </Image.Source>
-                                        </Image>
+                                            <Image Width="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4"  HorizontalAlignment="Center" Source="{Binding AgentLogo}">
+                                            </Image>
                                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                                             <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding AgentTypeTitle}"></TextBlock>
                                             <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="  |  "></TextBlock>
                                             <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding Title}"></TextBlock>
                                         </StackPanel>
-                                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding ProductCount,StringFormat={}{0:0} продаж за год}"></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding SalesForYear,StringFormat={}{0:0} продаж за год}"></TextBlock>
                                         <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
                                             <TextBlock FontSize="16" Text="{Binding Phone}"></TextBlock>
-                                            <TextBlock Text="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     "/>
+                                            <TextBlock Text="{Binding Width}"/>
                                         </StackPanel>
                                         <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding Priority,StringFormat=Приоритетность: {0}}"></TextBlock>
-                                        <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" FontSize="20" Text="{Binding INN,StringFormat={}{0:0}%}"></TextBlock>
+                                        <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="4" FontSize="40" Text="{Binding Discount,StringFormat={}{0:0}%}"></TextBlock>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

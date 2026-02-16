@@ -11,7 +11,9 @@ namespace Алалыкин_Глазки_save
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
     public partial class Agent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -39,10 +41,69 @@ namespace Алалыкин_Глазки_save
             }
             set { if (AgentType.ID == AgentTypeID) AgentTypeTitle=AgentType.Title; }
         }
-        public int ProductCount
+        public int SalesForYear
         {
-            get { return ProductSale.Count; }
-            set { ProductCount = ProductSale.Count; }
+            get
+            {
+                int sales = 0;
+                foreach (ProductSale productSale in ProductSale)
+                {
+                    TimeSpan differenceWithoutTime = DateTime.Today.Date - productSale.SaleDate.Date;
+                        sales += productSale.ProductCount;
+                }
+                return sales;
+            }
+        }
+        public decimal Sales
+        {
+            get
+            {
+                decimal s = 0;
+                foreach (ProductSale productSale in ProductSale)
+                {
+                    s += productSale.Cost;
+                }
+                return s;
+            }
+        }
+        public string AgentLogo
+        {
+            get
+            {
+                if (Logo == "") return "agents/picture.png";
+                else return Logo;
+            }
+        }
+        public string PhoneNum
+        {
+            get
+            {
+                string phone = new string(Phone.Where(char.IsDigit).ToArray());
+                return phone;
+            }
+        }
+        public int Discount
+        {
+            get
+            {
+                if (this.Sales >= 500000)
+                    return 25;
+                if (this.Sales >= 150000)
+                    return 20;
+                if (this.Sales >= 50000)
+                    return 10;
+                if (this.Sales >= 10000)
+                    return 5;
+                return 0;
+            }
+        }
+        public string FontStyle
+        {
+            get
+            {
+                if (Discount >= 25) return "LightGreen";
+                else return "White";
+            }
         }
         public virtual AgentType AgentType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
