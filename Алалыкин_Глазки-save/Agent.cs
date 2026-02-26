@@ -46,9 +46,11 @@ namespace Алалыкин_Глазки_save
             get
             {
                 int sales = 0;
+                DateTime Date = DateTime.Today.Date;
                 foreach (ProductSale productSale in ProductSale)
                 {
-                    TimeSpan differenceWithoutTime = DateTime.Today.Date - productSale.SaleDate.Date;
+                    TimeSpan differenceWithoutTime = Date - productSale.SaleDate.Date;
+                    //if (differenceWithoutTime.TotalDays <= 365)
                         sales += productSale.ProductCount;
                 }
                 return sales;
@@ -72,14 +74,6 @@ namespace Алалыкин_Глазки_save
             {
                 if (Logo == "") return "agents/picture.png";
                 else return Logo;
-            }
-        }
-        public string PhoneNum
-        {
-            get
-            {
-                string phone = new string(Phone.Where(char.IsDigit).ToArray());
-                return phone;
             }
         }
         public int Discount

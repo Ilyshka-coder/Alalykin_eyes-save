@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Алалыкин_Глазки_save"
         mc:Ignorable="d"
-        Title="Алалыкин Глазки-save" Height="450" Width="800" FontFamily="Century Gothic" Icon="/eyes-resources/Глазки-save.ico" MinHeight="750" MinWidth="1250">
+        Title="Алалыкин Глазки-save" Height="450" Width="800" FontFamily="Century Gothic" Icon="/eyes-resources/Глазки-save.ico" MinHeight="750" MinWidth="1250" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
@@ -15,6 +15,6 @@
         <Image Source="/eyes-resources/Глазки-save.png" HorizontalAlignment="Left"></Image>
         <TextBlock Text="Список агентов" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Frame Grid.Row="1" Name="MainFrame" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden"></Frame>
-        <Button Content="Назад" Name="BtnBack" HorizontalAlignment="Right" Click="BtnBack_Click"/>
+        <Button Content="Назад" HorizontalAlignment="Right" Name="BtnBack" Click="BtnBack_Click"/>
     </Grid>
 </Window>

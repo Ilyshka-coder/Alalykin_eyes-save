@@ -42,40 +42,58 @@
                 </ComboBox>
             </StackPanel>
         </WrapPanel>
+        <Button Content="Добавить агента" VerticalAlignment="Bottom" HorizontalAlignment="Right" Name="AddButton" Click="AddButton_Click"/>
         <ListView Name="AgentListView" Grid.Row="2">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="1" Background="{Binding FontStyle}">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition Width="1580"></ColumnDefinition>
-                                            <ColumnDefinition Width="100"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="50"/>
-                                            <RowDefinition Height="30"/>
-                                            <RowDefinition Height="30"/>
-                                            <RowDefinition Height="30"/>
-                                        </Grid.RowDefinitions>
-                                            <Image Width="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4"  HorizontalAlignment="Center" Source="{Binding AgentLogo}">
-                                            </Image>
-                                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                                            <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding AgentTypeTitle}"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="  |  "></TextBlock>
-                                            <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding Title}"></TextBlock>
-                                        </StackPanel>
-                                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding SalesForYear,StringFormat={}{0:0} продаж за год}"></TextBlock>
-                                        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
-                                            <TextBlock FontSize="16" Text="{Binding Phone}"></TextBlock>
-                                            <TextBlock Text="{Binding Width}"/>
-                                        </StackPanel>
-                                        <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding Priority,StringFormat=Приоритетность: {0}}"></TextBlock>
-                                        <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="4" FontSize="40" Text="{Binding Discount,StringFormat={}{0:0}%}"></TextBlock>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="1280"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="300"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Image Width="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4"  HorizontalAlignment="Center" Source="{Binding AgentLogo}">
+                            </Image>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding AgentTypeTitle}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="  |  "></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding Title}"></TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding SalesForYear,StringFormat={}{0:0} продаж за год}"></TextBlock>
+                            <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
+                                <TextBlock FontSize="16" Text="{Binding Phone}"></TextBlock>
+                                <TextBlock Text="{Binding Width}"/>
+                            </StackPanel>
+                            <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding Priority,StringFormat=Приоритетность: {0}}"></TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="4" FontSize="40" Text="{Binding Discount,StringFormat={}{0:0}%}"></TextBlock>
+                            <Button Content="Редактировать" Name="EditBtn" Click="EditBtn_Click" Grid.Column="3" Grid.RowSpan="4"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Name="TBCount" FontSize="20" Height="20"></TextBlock>
+            <TextBlock Name="TBAllRecords" FontSize="20" Height="20"></TextBlock>
+        <Button Name="LeftDirButton" Content="&lt;" Width="30" Height="30"
+                        Click="LeftDirButton_Click"></Button>
+            <ListBox FontSize="20" Name="PageListBox" MouseUp="PageListBox_MouseUp">
+                <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <Button Name="RightDirButton" Content="&gt;" Width="30" Height="30"
+                        Click="RightDirButton_Click"></Button>
+        </StackPanel>
     </Grid>
 </Page>
