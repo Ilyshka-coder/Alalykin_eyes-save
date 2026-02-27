@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.IO;
 namespace Алалыкин_Глазки_save
 {
     /// <summary>
@@ -38,9 +38,30 @@ namespace Алалыкин_Глазки_save
             OpenFileDialog myOpenFileDialog = new OpenFileDialog();
             if (myOpenFileDialog.ShowDialog() == true)
             {
-                _currentAgent.Logo = myOpenFileDialog.FileName;
+                string projectPath = AppDomain.CurrentDomain.BaseDirectory;
+                string relativePath = GetRelativePath(myOpenFileDialog.FileName, projectPath);
+                _currentAgent.Logo = relativePath;
                 LogoImage.Source = new BitmapImage(new Uri(myOpenFileDialog.FileName));
             }
+        }
+        public static string GetRelativePath(string fullPath, string basePath)
+        {
+            // Убедимся, что базовый путь заканчивается разделителем
+            if (!basePath.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+                basePath += System.IO.Path.DirectorySeparatorChar;
+
+            // Создаем URI
+            Uri fullUri = new Uri(fullPath);
+            Uri baseUri = new Uri(basePath);
+
+            // Получаем относительный URI
+            Uri relativeUri = baseUri.MakeRelativeUri(fullUri);
+
+            // Декодируем и заменяем слеши на системные разделители
+            string relativePath = Uri.UnescapeDataString(relativeUri.ToString())
+                .Replace('/', System.IO.Path.DirectorySeparatorChar);
+
+            return relativePath;
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -73,7 +94,7 @@ namespace Алалыкин_Глазки_save
             else
             {
                 string ph = _currentAgent.Phone.Replace("(", "").Replace("-", "").Replace(")", "").Replace(" ", "").Replace("+", "");
-                if (ph.Length <= 1 || (ph[1] == '9' || ph[1] == '4' || ph[1] == '8') && ph.Length != 11 || (ph[1] == '3' && ph.Length != 12))
+                if (ph.Length<=1 || (ph[1] == '9' || ph[1] == '4' || ph[1] == '8') && ph.Length != 11 || (ph[1] == '3' && ph.Length != 12))
                     errors.AppendLine("Укажите правильно телефон агента");
             }
             if (string.IsNullOrWhiteSpace(_currentAgent.Email))
