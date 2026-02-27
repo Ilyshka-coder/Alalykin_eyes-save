@@ -190,5 +190,22 @@ namespace Алалыкин_Глазки_save
         {
             Manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as Agent));
         }
+
+        private void AgentListView_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Agent selectedAgent = AgentListView.SelectedItem as Agent;
+            if (selectedAgent != null)
+            {
+                ContextMenu menu = new ContextMenu();
+                MenuItem item = new MenuItem();
+                item.Header = "Редактировать";
+                item.Click += (s, args) =>
+                {
+                    Manager.MainFrame.Navigate(new AddEditPage(selectedAgent));
+                };
+                menu.Items.Add(item);
+                menu.IsOpen = true;
+            }
+        }
     }
 }

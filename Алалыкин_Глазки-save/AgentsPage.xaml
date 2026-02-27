@@ -43,10 +43,10 @@
             </StackPanel>
         </WrapPanel>
         <Button Content="Добавить агента" VerticalAlignment="Bottom" HorizontalAlignment="Right" Name="AddButton" Click="AddButton_Click"/>
-        <ListView Name="AgentListView" Grid.Row="2">
+        <ListView Name="AgentListView" Grid.Row="2" MouseRightButtonUp="AgentListView_MouseRightButtonUp">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Click="EditBtn_Click" Height="160" Width="1870" Background="{Binding FontStyle}">
+                    <Border Background="{Binding FontStyle}" BorderBrush="Black"  BorderThickness="1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -74,7 +74,7 @@
                             <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding Priority,StringFormat=Приоритетность: {0}}"></TextBlock>
                             <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="4" FontSize="40" Text="{Binding Discount,StringFormat={}{0:0}%}"></TextBlock>
                         </Grid>
-                    </Button>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

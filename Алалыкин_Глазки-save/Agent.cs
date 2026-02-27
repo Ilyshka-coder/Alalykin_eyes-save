@@ -95,7 +95,7 @@ namespace Алалыкин_Глазки_save
             get
             {
                 if (Discount >= 25) return "LightGreen";
-                else return "White";
+                else return "Transparent";
             }
         }
         public virtual AgentType AgentType { get; set; }
