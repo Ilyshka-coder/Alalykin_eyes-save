@@ -28,6 +28,9 @@ namespace Алалыкин_Глазки_save
             if (SelectedAgent != null)
                 _currentAgent = SelectedAgent;
             DataContext = _currentAgent;
+            ComboBoxType.SelectedIndex = _currentAgent.AgentTypeID-1;
+            if (_currentAgent.AgentTypeID>0) DeleteBtn.Visibility = Visibility.Visible;
+            else DeleteBtn.Visibility = Visibility.Hidden;
         }
 
         private void ChangePictureBtn_Click(object sender, RoutedEventArgs e)
@@ -42,6 +45,12 @@ namespace Алалыкин_Глазки_save
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (ComboBoxType.Text == "МФО") _currentAgent.AgentTypeID = 1;
+            if (ComboBoxType.Text == "ООО") _currentAgent.AgentTypeID = 2;
+            if (ComboBoxType.Text == "ЗАО") _currentAgent.AgentTypeID = 3;
+            if (ComboBoxType.Text == "МКК") _currentAgent.AgentTypeID = 4;
+            if (ComboBoxType.Text == "ОАО") _currentAgent.AgentTypeID = 5;
+            if (ComboBoxType.Text == "ПАО") _currentAgent.AgentTypeID = 6;
             StringBuilder errors = new StringBuilder();
             if (string.IsNullOrWhiteSpace(_currentAgent.Title))
                 errors.AppendLine("Укажите наименование агента");
@@ -64,7 +73,7 @@ namespace Алалыкин_Глазки_save
             else
             {
                 string ph = _currentAgent.Phone.Replace("(", "").Replace("-", "").Replace(")", "").Replace(" ", "").Replace("+", "");
-                if ((ph[1] == '9' || ph[1] == '4' || ph[1] == '8') && ph.Length != 11 || (ph[1] == '3' && ph.Length != 12))
+                if (ph.Length <= 1 || (ph[1] == '9' || ph[1] == '4' || ph[1] == '8') && ph.Length != 11 || (ph[1] == '3' && ph.Length != 12))
                     errors.AppendLine("Укажите правильно телефон агента");
             }
             if (string.IsNullOrWhiteSpace(_currentAgent.Email))
@@ -90,7 +99,28 @@ namespace Алалыкин_Глазки_save
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var currentAgent = (sender as Button).DataContext as Agent;
+            var currentProductSale = AlalykinEyesEntities1.GetContext().ProductSale.ToList();
+            currentProductSale = currentProductSale.Where(p => p.AgentID == currentAgent.ID).ToList();
+            if (currentProductSale.Count != 0)
+                MessageBox.Show("Невозможно выполнить удаление");
+            else
+            {
+                if (MessageBox.Show("Вы хотите удаленить агента?","Внимание!",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        AlalykinEyesEntities1.GetContext().Agent.Remove(currentAgent);
+                        AlalykinEyesEntities1.GetContext().SaveChanges();
+                        Manager.MainFrame.GoBack();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                }
+            }
         }
     }
 }

@@ -45,12 +45,12 @@
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
             <TextBlock Text="Тип аренды" FontSize="15" Width="150" Height="20" />
             <ComboBox Width="100" Height="30" FontSize="15" Name="ComboBoxType">
-                <Label Content="МОО" />
-                <Label Content="ООО" />
-                <Label Content="ЗАО" />
-                <Label Content="МКК" />
-                <Label Content="ОАО" />
-                <Label Content="ПАО" />
+                <Label Content="МФО"/>
+                <Label Content="ООО"/>
+                <Label Content="ЗАО"/>
+                <Label Content="МКК"/>
+                <Label Content="ОАО"/>
+                <Label Content="ПАО"/>
             </ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">

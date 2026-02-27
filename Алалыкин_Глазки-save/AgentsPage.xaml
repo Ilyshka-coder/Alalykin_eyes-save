@@ -46,13 +46,12 @@
         <ListView Name="AgentListView" Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" Background="{Binding FontStyle}">
+                    <Button Click="EditBtn_Click" Height="160" Width="1870" Background="{Binding FontStyle}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="1280"></ColumnDefinition>
+                                <ColumnDefinition Width="1580"></ColumnDefinition>
                                 <ColumnDefinition Width="100"></ColumnDefinition>
-                                <ColumnDefinition Width="300"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50"/>
@@ -74,9 +73,8 @@
                             </StackPanel>
                             <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Text="{Binding Priority,StringFormat=Приоритетность: {0}}"></TextBlock>
                             <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="4" FontSize="40" Text="{Binding Discount,StringFormat={}{0:0}%}"></TextBlock>
-                            <Button Content="Редактировать" Name="EditBtn" Click="EditBtn_Click" Grid.Column="3" Grid.RowSpan="4"/>
                         </Grid>
-                    </Border>
+                    </Button>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

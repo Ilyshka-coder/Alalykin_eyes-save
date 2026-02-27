@@ -27,6 +27,11 @@ namespace Алалыкин_Глазки_save
             AgentListView.ItemsSource = currentAgent;
             ComboType.SelectedIndex = 0;
             SortType.SelectedIndex = 0;
+            this.Loaded += AgentsPage_Loaded;
+        }
+        private void AgentsPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateAgents();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

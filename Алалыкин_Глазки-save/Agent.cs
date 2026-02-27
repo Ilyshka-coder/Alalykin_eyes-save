@@ -39,7 +39,6 @@ namespace Алалыкин_Глазки_save
             {
                 return AgentType.Title;
             }
-            set { if (AgentType.ID == AgentTypeID) AgentTypeTitle=AgentType.Title; }
         }
         public int SalesForYear
         {
@@ -72,7 +71,7 @@ namespace Алалыкин_Глазки_save
         {
             get
             {
-                if (Logo == "") return "agents/picture.png";
+                if (Logo == "" || Logo == null) return "agents/picture.png";
                 else return Logo;
             }
         }
