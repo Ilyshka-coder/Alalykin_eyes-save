@@ -71,10 +71,15 @@ namespace Алалыкин_Глазки_save
         {
             get
             {
-                if (Logo == "" || Logo == null) return "agents/picture.png";
-                else return Logo;
+                if (fullPath == null || fullPath == "")
+                {
+                    if (Logo == "" || Logo == null) return "agents/picture.png";
+                    else return Logo;
+                }
+                else return fullPath;
             }
         }
+        public string fullPath { get; set; }
         public int Discount
         {
             get

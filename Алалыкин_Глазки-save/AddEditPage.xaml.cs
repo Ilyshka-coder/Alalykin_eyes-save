@@ -39,31 +39,16 @@ namespace Алалыкин_Глазки_save
             if (myOpenFileDialog.ShowDialog() == true)
             {
                 string projectPath = AppDomain.CurrentDomain.BaseDirectory;
-                string relativePath = GetRelativePath(myOpenFileDialog.FileName, projectPath);
-                _currentAgent.Logo = relativePath;
-                LogoImage.Source = new BitmapImage(new Uri(myOpenFileDialog.FileName));
+                Uri a = new Uri(projectPath);
+                Uri b = new Uri(myOpenFileDialog.FileName);
+                string relativePath = Convert.ToString(a.MakeRelativeUri(b));
+                _currentAgent.Logo = relativePath.Replace("/","\\");
+                string fullPath = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, relativePath);
+                LogoImage.Source = new BitmapImage(b);
+                _currentAgent.fullPath = fullPath.Replace("/","\\");
             }
         }
-        public static string GetRelativePath(string fullPath, string basePath)
-        {
-            // Убедимся, что базовый путь заканчивается разделителем
-            if (!basePath.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
-                basePath += System.IO.Path.DirectorySeparatorChar;
-
-            // Создаем URI
-            Uri fullUri = new Uri(fullPath);
-            Uri baseUri = new Uri(basePath);
-
-            // Получаем относительный URI
-            Uri relativeUri = baseUri.MakeRelativeUri(fullUri);
-
-            // Декодируем и заменяем слеши на системные разделители
-            string relativePath = Uri.UnescapeDataString(relativeUri.ToString())
-                .Replace('/', System.IO.Path.DirectorySeparatorChar);
-
-            return relativePath;
-        }
-
+        
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (ComboBoxType.Text == "МФО") _currentAgent.AgentTypeID = 1;
