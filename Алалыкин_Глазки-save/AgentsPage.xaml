@@ -43,7 +43,7 @@
             </StackPanel>
         </WrapPanel>
         <Button Content="Добавить агента" VerticalAlignment="Bottom" HorizontalAlignment="Right" Name="AddButton" Click="AddButton_Click"/>
-        <ListView Name="AgentListView" Grid.Row="2" MouseRightButtonUp="AgentListView_MouseRightButtonUp">
+        <ListView Name="AgentListView" Grid.Row="2" MouseRightButtonUp="AgentListView_MouseRightButtonUp" SelectionChanged="AgentListView_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Background="{Binding FontStyle}" BorderBrush="Black"  BorderThickness="1">
@@ -93,5 +93,6 @@
         <Button Name="RightDirButton" Content="&gt;" Width="30" Height="30"
                         Click="RightDirButton_Click"></Button>
         </StackPanel>
+        <Button Grid.Row="3" HorizontalAlignment="Left" Content="Изменить приоритет на ..." Name="ChangePriorityBtn" Click="ChangePriorityBtn_Click" Height="30" Width="300"/>
     </Grid>
 </Page>

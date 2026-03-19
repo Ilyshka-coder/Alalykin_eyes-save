@@ -28,6 +28,7 @@ namespace Алалыкин_Глазки_save
             ComboType.SelectedIndex = 0;
             SortType.SelectedIndex = 0;
             this.Loaded += AgentsPage_Loaded;
+            ChangePriorityBtn.Visibility = Visibility.Hidden;
         }
         private void AgentsPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -110,7 +111,7 @@ namespace Алалыкин_Глазки_save
             {
                 currentAgents = currentAgents.OrderByDescending(p => p.Priority).ToList();
             }
-            currentAgents = currentAgents.Where(p => (p.Title.ToLower().Contains(TBoxSearch.Text.ToLower()) || p.Phone.Replace("+","").Replace(" ","").Replace("(","").Replace(")","").Replace("-","").Contains(TBoxSearch.Text.Replace("+", "").Replace(" ", "").Replace("(", "").Replace(")", "").Replace("-", "")) || p.Email.ToLower().Contains(TBoxSearch.Text.ToLower()))).ToList();
+            currentAgents = currentAgents.Where(p => (p.Title.ToLower().Contains(TBoxSearch.Text.ToLower()) || p.Phone.Replace("+", "").Replace(" ", "").Replace("(", "").Replace(")", "").Replace("-", "").Contains(TBoxSearch.Text.Replace("+", "").Replace(" ", "").Replace("(", "").Replace(")", "").Replace("-", "")) || p.Email.ToLower().Contains(TBoxSearch.Text.ToLower()))).ToList();
             AgentListView.ItemsSource = currentAgents.ToList();
             AgentListView.ItemsSource = currentAgents;
             TableList = currentAgents;
@@ -141,7 +142,7 @@ namespace Алалыкин_Глазки_save
         {
             CurrentPageList.Clear();
             CountRecords = TableList.Count;
-            CountPage = (CountRecords + ObjectsOnPage-1) / ObjectsOnPage;
+            CountPage = (CountRecords + ObjectsOnPage - 1) / ObjectsOnPage;
 
             int newPage = CurrentPage;
 
@@ -205,6 +206,40 @@ namespace Алалыкин_Глазки_save
                 };
                 menu.Items.Add(item);
                 menu.IsOpen = true;
+            }
+        }
+
+        private void AgentListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ChangePriorityBtn.Visibility = AgentListView.SelectedItems.Count >= 2 ?
+                Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void ChangePriorityBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedAgents = AgentListView.SelectedItems.Cast<Agent>().ToList();
+
+            if (selectedAgents.Count < 2)
+                return;
+
+            var maxPriority = selectedAgents.Max(a => a.Priority);
+
+            var dialog = new ChangePriority(maxPriority);
+            if (dialog.ShowDialog() == true)
+            {
+                int newPriority = dialog.NewPriority;
+
+                // Изменяем приоритет в базе данных
+                foreach (var agent in selectedAgents)
+                {
+                    var dbAgent = AlalykinEyesEntities1.GetContext().Agent.Find(agent.ID);
+                    if (dbAgent != null)
+                    {
+                        dbAgent.Priority = newPriority;
+                        AlalykinEyesEntities1.GetContext().SaveChanges();
+                        UpdateAgents();
+                    }
+                }
             }
         }
     }
